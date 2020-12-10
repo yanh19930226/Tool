@@ -6,18 +6,19 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Tool.Models
 {
-    public partial class testContext : DbContext
+    public partial class DDDContext : DbContext
     {
-        public testContext()
+        public DDDContext()
         {
         }
 
-        public testContext(DbContextOptions<testContext> options)
+        public DDDContext(DbContextOptions<DDDContext> options)
             : base(options)
         {
         }
 
         public virtual DbSet<CouponList> CouponLists { get; set; }
+        public virtual DbSet<Detail> Details { get; set; }
         public virtual DbSet<DiyGroup> DiyGroups { get; set; }
         public virtual DbSet<DiyMaterial> DiyMaterials { get; set; }
         public virtual DbSet<DiyScheduled> DiyScheduleds { get; set; }
@@ -49,6 +50,7 @@ namespace Tool.Models
         public virtual DbSet<OrderPrimary> OrderPrimaries { get; set; }
         public virtual DbSet<PayCurrency> PayCurrencies { get; set; }
         public virtual DbSet<PayMode> PayModes { get; set; }
+        public virtual DbSet<Primary> Primaries { get; set; }
         public virtual DbSet<PropertyDelimit> PropertyDelimits { get; set; }
         public virtual DbSet<PropertyList> PropertyLists { get; set; }
         public virtual DbSet<SysAccount> SysAccounts { get; set; }
@@ -62,7 +64,7 @@ namespace Tool.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=test;User ID=sa;Password=123");
+                optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=DDD;User ID=sa;Password=123");
             }
         }
 
@@ -72,17 +74,18 @@ namespace Tool.Models
 
             modelBuilder.Entity<CouponList>(entity =>
             {
-                entity.HasKey(e => e.CouponId);
+                entity.HasNoKey();
 
                 entity.ToTable("Coupon_List");
-
-                entity.Property(e => e.CouponId)
-                    .HasMaxLength(36)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.CouponCode)
                     .IsRequired()
                     .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CouponId)
+                    .IsRequired()
+                    .HasMaxLength(36)
                     .IsUnicode(false);
 
                 entity.Property(e => e.CreatedTime).HasColumnType("date");
@@ -104,24 +107,69 @@ namespace Tool.Models
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<Detail>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("Detail");
+
+                entity.Property(e => e.Amount)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Color)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DetailedId)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Image)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Num)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Other)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PrimaryId)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Size)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Title)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Version)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<DiyGroup>(entity =>
             {
-                entity.HasKey(e => e.GroupId)
-                    .HasName("PK_DIY_GROUP");
+                entity.HasNoKey();
 
                 entity.ToTable("Diy_Group");
-
-                entity.HasComment("Diy_Group - 定制分组");
-
-                entity.Property(e => e.GroupId)
-                    .HasMaxLength(36)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.CoverFile)
                     .HasMaxLength(136)
                     .IsUnicode(false);
 
                 entity.Property(e => e.GoodsId)
+                    .IsRequired()
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.GroupId)
                     .IsRequired()
                     .HasMaxLength(36)
                     .IsUnicode(false);
@@ -138,14 +186,9 @@ namespace Tool.Models
 
             modelBuilder.Entity<DiyMaterial>(entity =>
             {
-                entity.HasKey(e => e.MaterialId)
-                    .HasName("PK_DIY_MATERIAL");
+                entity.HasNoKey();
 
                 entity.ToTable("Diy_Material");
-
-                entity.Property(e => e.MaterialId)
-                    .HasMaxLength(36)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.Color)
                     .HasMaxLength(50)
@@ -153,6 +196,11 @@ namespace Tool.Models
 
                 entity.Property(e => e.ImageFile)
                     .HasMaxLength(136)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.MaterialId)
+                    .IsRequired()
+                    .HasMaxLength(36)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Title)
@@ -166,14 +214,9 @@ namespace Tool.Models
 
             modelBuilder.Entity<DiyScheduled>(entity =>
             {
-                entity.HasKey(e => e.ScheduledId)
-                    .HasName("PK_DIY_SCHEDULED");
+                entity.HasNoKey();
 
                 entity.ToTable("Diy_Scheduled");
-
-                entity.Property(e => e.ScheduledId)
-                    .HasMaxLength(36)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.BorderMaterialId)
                     .HasMaxLength(36)
@@ -199,6 +242,11 @@ namespace Tool.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.ScheduledId)
+                    .IsRequired()
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.ShirtNum)
                     .HasMaxLength(5)
                     .IsUnicode(false);
@@ -214,16 +262,9 @@ namespace Tool.Models
 
             modelBuilder.Entity<DiySkin>(entity =>
             {
-                entity.HasKey(e => e.SkinId)
-                    .HasName("PK_DIY_SKIN");
+                entity.HasNoKey();
 
                 entity.ToTable("Diy_Skin");
-
-                entity.HasComment("Diy_Skin - 定制皮肤");
-
-                entity.Property(e => e.SkinId)
-                    .HasMaxLength(36)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.Back)
                     .HasMaxLength(136)
@@ -253,6 +294,11 @@ namespace Tool.Models
                     .HasMaxLength(136)
                     .IsUnicode(false);
 
+                entity.Property(e => e.SkinId)
+                    .IsRequired()
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Title)
                     .IsRequired()
                     .HasMaxLength(50)
@@ -265,16 +311,9 @@ namespace Tool.Models
 
             modelBuilder.Entity<DiyUserImage>(entity =>
             {
-                entity.HasKey(e => e.UserImageId)
-                    .HasName("PK_DIY_USERIMAGE");
+                entity.HasNoKey();
 
                 entity.ToTable("Diy_UserImage");
-
-                entity.HasComment("Diy_UserImage - 定制用户上传的图片");
-
-                entity.Property(e => e.UserImageId)
-                    .HasMaxLength(36)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.CreationTime).HasColumnType("datetime");
 
@@ -293,6 +332,11 @@ namespace Tool.Models
                     .HasMaxLength(36)
                     .IsUnicode(false);
 
+                entity.Property(e => e.UserImageId)
+                    .IsRequired()
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Version)
                     .HasMaxLength(36)
                     .IsUnicode(false);
@@ -300,16 +344,9 @@ namespace Tool.Models
 
             modelBuilder.Entity<DiyWork>(entity =>
             {
-                entity.HasKey(e => e.WorksId)
-                    .HasName("PK_DIY_WORKS");
+                entity.HasNoKey();
 
                 entity.ToTable("Diy_Works");
-
-                entity.HasComment("Diy_Works - 定制作品");
-
-                entity.Property(e => e.WorksId)
-                    .HasMaxLength(36)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.Back)
                     .IsRequired()
@@ -350,20 +387,18 @@ namespace Tool.Models
                 entity.Property(e => e.Version)
                     .HasMaxLength(100)
                     .IsUnicode(false);
+
+                entity.Property(e => e.WorksId)
+                    .IsRequired()
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<DiyWorsImage>(entity =>
             {
-                entity.HasKey(e => e.WorsImageId)
-                    .HasName("PK_DIY_WORSIMAGE");
+                entity.HasNoKey();
 
                 entity.ToTable("Diy_WorsImage");
-
-                entity.HasComment("Diy_WorsImage - 定制用户作品选用图片");
-
-                entity.Property(e => e.WorsImageId)
-                    .HasMaxLength(36)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.CreationTime).HasColumnType("datetime");
 
@@ -385,20 +420,18 @@ namespace Tool.Models
                 entity.Property(e => e.Version)
                     .HasMaxLength(100)
                     .IsUnicode(false);
+
+                entity.Property(e => e.WorsImageId)
+                    .IsRequired()
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<DiyWorsText>(entity =>
             {
-                entity.HasKey(e => e.WorsTextId)
-                    .HasName("PK_DIY_WORSTEXT");
+                entity.HasNoKey();
 
                 entity.ToTable("Diy_WorsText");
-
-                entity.HasComment("Diy_WorsText - 定制用户作品选用");
-
-                entity.Property(e => e.WorsTextId)
-                    .HasMaxLength(36)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.Border)
                     .IsRequired()
@@ -427,24 +460,29 @@ namespace Tool.Models
                 entity.Property(e => e.WorksId)
                     .HasMaxLength(36)
                     .IsUnicode(false);
+
+                entity.Property(e => e.WorsTextId)
+                    .IsRequired()
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<GoodsBaseInfo>(entity =>
             {
-                entity.HasKey(e => e.GoodsId)
-                    .HasName("PK_GOODS_BASEINFO");
+                entity.HasNoKey();
 
                 entity.ToTable("Goods_BaseInfo");
-
-                entity.Property(e => e.GoodsId)
-                    .HasMaxLength(120)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.Code).HasMaxLength(200);
 
                 entity.Property(e => e.Description).HasColumnType("text");
 
                 entity.Property(e => e.EditTime).HasColumnType("datetime");
+
+                entity.Property(e => e.GoodsId)
+                    .IsRequired()
+                    .HasMaxLength(120)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Introduction).HasColumnType("text");
 
@@ -493,13 +531,9 @@ namespace Tool.Models
 
             modelBuilder.Entity<GoodsDummy>(entity =>
             {
-                entity.HasKey(e => e.GoodsId);
+                entity.HasNoKey();
 
                 entity.ToTable("Goods_Dummy");
-
-                entity.Property(e => e.GoodsId)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.BaseId)
                     .HasMaxLength(50)
@@ -507,6 +541,11 @@ namespace Tool.Models
 
                 entity.Property(e => e.Description)
                     .HasMaxLength(1000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.GoodsId)
+                    .IsRequired()
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.ImgUrl)
@@ -524,16 +563,9 @@ namespace Tool.Models
 
             modelBuilder.Entity<GoodsKeyVal>(entity =>
             {
-                entity.HasKey(e => e.RowId)
-                    .HasName("PK_GOODS_KEYVAL");
+                entity.HasNoKey();
 
                 entity.ToTable("Goods_KeyVal");
-
-                entity.HasComment("Goods_KeyVal -  商品关联");
-
-                entity.Property(e => e.RowId)
-                    .HasMaxLength(36)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.GoodsId)
                     .HasMaxLength(36)
@@ -541,6 +573,11 @@ namespace Tool.Models
 
                 entity.Property(e => e.KeyId)
                     .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RowId)
+                    .IsRequired()
+                    .HasMaxLength(36)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Val)
@@ -554,19 +591,20 @@ namespace Tool.Models
 
             modelBuilder.Entity<GoodsLink>(entity =>
             {
-                entity.HasKey(e => e.LinkId);
+                entity.HasNoKey();
 
                 entity.ToTable("Goods_Link");
-
-                entity.Property(e => e.LinkId)
-                    .HasMaxLength(36)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.GoodsId)
                     .HasMaxLength(36)
                     .IsUnicode(false);
 
                 entity.Property(e => e.LinkGoodsId)
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LinkId)
+                    .IsRequired()
                     .HasMaxLength(36)
                     .IsUnicode(false);
 
@@ -577,16 +615,9 @@ namespace Tool.Models
 
             modelBuilder.Entity<GoodsPicBase>(entity =>
             {
-                entity.HasKey(e => e.PicId)
-                    .HasName("PK_GOODS_PICBASE");
+                entity.HasNoKey();
 
                 entity.ToTable("Goods_PicBase");
-
-                entity.HasComment("Goods_PicBase -  图案相关图片");
-
-                entity.Property(e => e.PicId)
-                    .HasMaxLength(36)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.FileId)
                     .HasMaxLength(336)
@@ -594,6 +625,11 @@ namespace Tool.Models
 
                 entity.Property(e => e.GoodsId)
                     .HasMaxLength(136)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PicId)
+                    .IsRequired()
+                    .HasMaxLength(36)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Val)
@@ -607,13 +643,9 @@ namespace Tool.Models
 
             modelBuilder.Entity<GoodsReduction>(entity =>
             {
-                entity.HasKey(e => e.ReductionId);
+                entity.HasNoKey();
 
                 entity.ToTable("Goods_Reduction");
-
-                entity.Property(e => e.ReductionId)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.Amount).HasColumnType("decimal(18, 0)");
 
@@ -629,6 +661,11 @@ namespace Tool.Models
 
                 entity.Property(e => e.ReductionAmount).HasColumnType("decimal(18, 0)");
 
+                entity.Property(e => e.ReductionId)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Version)
                     .HasMaxLength(100)
                     .IsUnicode(false);
@@ -636,16 +673,9 @@ namespace Tool.Models
 
             modelBuilder.Entity<GoodsReview>(entity =>
             {
-                entity.HasKey(e => e.ReviewId)
-                    .HasName("PK_GOODS_REVIEW");
+                entity.HasNoKey();
 
                 entity.ToTable("Goods_Review");
-
-                entity.HasComment("Goods_Review -  商品评论");
-
-                entity.Property(e => e.ReviewId)
-                    .HasMaxLength(36)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.Content)
                     .HasMaxLength(500)
@@ -666,6 +696,11 @@ namespace Tool.Models
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
+                entity.Property(e => e.ReviewId)
+                    .IsRequired()
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Title)
                     .HasMaxLength(100)
                     .IsUnicode(false);
@@ -677,20 +712,18 @@ namespace Tool.Models
 
             modelBuilder.Entity<GoodsReviewStatistic>(entity =>
             {
-                entity.HasKey(e => e.StatisticsId)
-                    .HasName("PK_GOODS_REVIEWSTATISTICS");
+                entity.HasNoKey();
 
                 entity.ToTable("Goods_ReviewStatistics");
-
-                entity.HasComment("Goods_ReviewStatistics -  商品评论统计");
-
-                entity.Property(e => e.StatisticsId)
-                    .HasMaxLength(36)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.Average).HasColumnType("money");
 
                 entity.Property(e => e.GoodsId)
+                    .IsRequired()
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StatisticsId)
                     .IsRequired()
                     .HasMaxLength(36)
                     .IsUnicode(false);
@@ -704,16 +737,9 @@ namespace Tool.Models
 
             modelBuilder.Entity<GoodsSku>(entity =>
             {
-                entity.HasKey(e => e.SkuId)
-                    .HasName("PK_GOODS_SKU");
+                entity.HasNoKey();
 
                 entity.ToTable("Goods_Sku");
-
-                entity.HasComment("Goods_Sku - 商品基础");
-
-                entity.Property(e => e.SkuId)
-                    .HasMaxLength(120)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.GoodsId)
                     .HasMaxLength(120)
@@ -731,6 +757,11 @@ namespace Tool.Models
 
                 entity.Property(e => e.Price).HasColumnType("money");
 
+                entity.Property(e => e.SkuId)
+                    .IsRequired()
+                    .HasMaxLength(120)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Title).HasMaxLength(200);
 
                 entity.Property(e => e.Version)
@@ -740,22 +771,18 @@ namespace Tool.Models
 
             modelBuilder.Entity<GoodsSort>(entity =>
             {
-                entity.HasKey(e => e.SortId)
-                    .HasName("PK_GOODS_SORT");
+                entity.HasNoKey();
 
                 entity.ToTable("Goods_Sort");
-
-                entity.HasComment("Goods_Sort -  商品分类表");
-
-                entity.Property(e => e.SortId)
-                    .HasMaxLength(36)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.Path)
                     .IsRequired()
                     .HasMaxLength(360);
 
-                entity.Property(e => e.Sno).HasComment("商品分类排序 ，按从小到大排序，序号越小越前面");
+                entity.Property(e => e.SortId)
+                    .IsRequired()
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.SortName)
                     .IsRequired()
@@ -772,18 +799,16 @@ namespace Tool.Models
 
             modelBuilder.Entity<LogError>(entity =>
             {
-                entity.HasKey(e => e.ErrorId)
-                    .HasName("PK_LOG_ERROR");
+                entity.HasNoKey();
 
                 entity.ToTable("Log_Error");
 
-                entity.HasComment("Log_Error - 异常日志");
+                entity.Property(e => e.Detailed).HasMaxLength(3000);
 
                 entity.Property(e => e.ErrorId)
+                    .IsRequired()
                     .HasMaxLength(36)
                     .IsUnicode(false);
-
-                entity.Property(e => e.Detailed).HasMaxLength(3000);
 
                 entity.Property(e => e.ErrorTime).HasColumnType("datetime");
 
@@ -791,8 +816,6 @@ namespace Tool.Models
                     .HasMaxLength(36)
                     .IsUnicode(false)
                     .HasColumnName("IP");
-
-                entity.Property(e => e.LevelNum).HasComment("1  提示   Prompt\r\n   2  警告   Warning\r\n   3  普通  Ordinary\r\n   4  严重  Serious");
 
                 entity.Property(e => e.Msg).HasMaxLength(300);
 
@@ -810,18 +833,16 @@ namespace Tool.Models
 
             modelBuilder.Entity<LogOperating>(entity =>
             {
-                entity.HasKey(e => e.LogId)
-                    .HasName("PK_LOG_OPERATING");
+                entity.HasNoKey();
 
                 entity.ToTable("Log_Operating");
 
-                entity.HasComment("Log_Operating - 操作日志");
-
-                entity.Property(e => e.LogId)
+                entity.Property(e => e.AdminId)
+                    .IsRequired()
                     .HasMaxLength(36)
                     .IsUnicode(false);
 
-                entity.Property(e => e.AdminId)
+                entity.Property(e => e.LogId)
                     .IsRequired()
                     .HasMaxLength(36)
                     .IsUnicode(false);
@@ -836,15 +857,11 @@ namespace Tool.Models
 
                 entity.Property(e => e.OpTime).HasColumnType("datetime");
 
-                entity.Property(e => e.OpType).HasComment("1  添加商品  AddGoods \r\n   2  发布商品  PubGoods");
-
                 entity.Property(e => e.ToUserId)
                     .HasMaxLength(36)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Val)
-                    .HasMaxLength(600)
-                    .HasComment("Json格式");
+                entity.Property(e => e.Val).HasMaxLength(600);
 
                 entity.Property(e => e.Version)
                     .HasMaxLength(100)
@@ -853,16 +870,9 @@ namespace Tool.Models
 
             modelBuilder.Entity<LogisticsConfig>(entity =>
             {
-                entity.HasKey(e => e.ConfigId)
-                    .HasName("PK_LOGISTICS_CONFIG");
+                entity.HasNoKey();
 
                 entity.ToTable("Logistics_Config");
-
-                entity.HasComment("Express_Config - 快递配置");
-
-                entity.Property(e => e.ConfigId)
-                    .HasMaxLength(36)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.AreaId)
                     .HasMaxLength(36)
@@ -870,13 +880,16 @@ namespace Tool.Models
 
                 entity.Property(e => e.Based).HasColumnType("money");
 
+                entity.Property(e => e.ConfigId)
+                    .IsRequired()
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.CreatedTime).HasColumnType("datetime");
 
                 entity.Property(e => e.FreePrice).HasColumnType("money");
 
                 entity.Property(e => e.FreeQuantity).HasColumnType("money");
-
-                entity.Property(e => e.Status).HasComment("1  可用 Open\r\n   2  不可用 Close\r\n   ");
 
                 entity.Property(e => e.Title)
                     .IsRequired()
@@ -893,15 +906,9 @@ namespace Tool.Models
 
             modelBuilder.Entity<MailList>(entity =>
             {
-                entity.HasKey(e => e.Rowid)
-                    .HasName("PK_Mail");
+                entity.HasNoKey();
 
                 entity.ToTable("MailList");
-
-                entity.Property(e => e.Rowid)
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("rowid");
 
                 entity.Property(e => e.Details)
                     .HasMaxLength(50)
@@ -918,6 +925,12 @@ namespace Tool.Models
                     .IsUnicode(false)
                     .HasColumnName("phone");
 
+                entity.Property(e => e.Rowid)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("rowid");
+
                 entity.Property(e => e.Username)
                     .HasMaxLength(50)
                     .IsUnicode(false)
@@ -926,22 +939,19 @@ namespace Tool.Models
 
             modelBuilder.Entity<MetaArea>(entity =>
             {
-                entity.HasKey(e => e.AreaId)
-                    .HasName("PK_META_AREA");
+                entity.HasNoKey();
 
                 entity.ToTable("Meta_Area");
 
-                entity.HasComment("Meta_Area - 国家地区");
-
                 entity.Property(e => e.AreaId)
+                    .IsRequired()
                     .HasMaxLength(36)
                     .IsUnicode(false);
 
                 entity.Property(e => e.LanguageId)
                     .IsRequired()
                     .HasMaxLength(36)
-                    .IsUnicode(false)
-                    .HasComment("关联语言表");
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -957,8 +967,6 @@ namespace Tool.Models
                     .HasMaxLength(36)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Types).HasComment("1   国家  Country\r\n   2   地区  Area\r\n   3   城市  City");
-
                 entity.Property(e => e.Version)
                     .HasMaxLength(100)
                     .IsUnicode(false);
@@ -966,17 +974,9 @@ namespace Tool.Models
 
             modelBuilder.Entity<OrderBilling>(entity =>
             {
-                entity.HasKey(e => e.BillingId)
-                    .HasName("PK_ORDER_BILLING");
+                entity.HasNoKey();
 
                 entity.ToTable("Order_Billing");
-
-                entity.HasComment("Order_Billing 账单地址");
-
-                entity.Property(e => e.BillingId)
-                    .HasMaxLength(36)
-                    .IsUnicode(false)
-                    .HasComment("账单地址ID");
 
                 entity.Property(e => e.Address1)
                     .HasMaxLength(300)
@@ -992,6 +992,11 @@ namespace Tool.Models
 
                 entity.Property(e => e.AreaName)
                     .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.BillingId)
+                    .IsRequired()
+                    .HasMaxLength(36)
                     .IsUnicode(false);
 
                 entity.Property(e => e.City)
@@ -1021,8 +1026,7 @@ namespace Tool.Models
                 entity.Property(e => e.PrimaryId)
                     .IsRequired()
                     .HasMaxLength(36)
-                    .IsUnicode(false)
-                    .HasComment("订单ID");
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Version)
                     .HasMaxLength(36)
@@ -1035,57 +1039,48 @@ namespace Tool.Models
 
             modelBuilder.Entity<OrderCalculator>(entity =>
             {
-                entity.HasKey(e => e.Cid)
-                    .HasName("PK_ORDER_CALCULATOR");
+                entity.HasNoKey();
 
                 entity.ToTable("Order_Calculator");
 
-                entity.HasComment("Order_Calculator - 订单计数器");
+                entity.Property(e => e.Cid)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("CID");
 
-                entity.Property(e => e.Cid).HasColumnName("CID");
-
-                entity.Property(e => e.PrimaryId)
-                    .HasMaxLength(36)
-                    .HasComment("订单ID");
+                entity.Property(e => e.PrimaryId).HasMaxLength(36);
             });
 
             modelBuilder.Entity<OrderCart>(entity =>
             {
-                entity.HasKey(e => e.CartId)
-                    .HasName("PK_ORDER_CART");
+                entity.HasNoKey();
 
                 entity.ToTable("Order_Cart");
 
-                entity.HasComment("Order_Cart - 购物车");
+                entity.Property(e => e.AddTime).HasColumnType("datetime");
 
                 entity.Property(e => e.CartId)
+                    .IsRequired()
                     .HasMaxLength(36)
                     .IsUnicode(false);
-
-                entity.Property(e => e.AddTime).HasColumnType("datetime");
 
                 entity.Property(e => e.GoodsId)
                     .IsRequired()
                     .HasMaxLength(150)
-                    .IsUnicode(false)
-                    .HasComment("商品ID");
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Num)
                     .IsRequired()
                     .HasMaxLength(800)
-                    .IsUnicode(false)
-                    .HasComment("商品次要属性JSON");
+                    .IsUnicode(false);
 
                 entity.Property(e => e.SkuId)
                     .HasMaxLength(200)
-                    .IsUnicode(false)
-                    .HasComment("主要颜色");
+                    .IsUnicode(false);
 
                 entity.Property(e => e.UserId)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasComment("用户ID");
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Version)
                     .HasMaxLength(100)
@@ -1094,21 +1089,20 @@ namespace Tool.Models
 
             modelBuilder.Entity<OrderDetailed>(entity =>
             {
-                entity.HasKey(e => e.DetailedId)
-                    .HasName("PK_ORDER_DETAILED");
+                entity.HasNoKey();
 
                 entity.ToTable("Order_Detailed");
 
+                entity.Property(e => e.CreateTime).HasColumnType("datetime");
+
                 entity.Property(e => e.DetailedId)
+                    .IsRequired()
                     .HasMaxLength(36)
                     .IsUnicode(false);
 
-                entity.Property(e => e.CreateTime).HasColumnType("datetime");
-
                 entity.Property(e => e.DisId)
                     .HasMaxLength(36)
-                    .IsUnicode(false)
-                    .HasComment("-1 表示无折扣信息");
+                    .IsUnicode(false);
 
                 entity.Property(e => e.GoodsId)
                     .IsRequired()
@@ -1121,9 +1115,7 @@ namespace Tool.Models
 
                 entity.Property(e => e.OldPrice).HasColumnType("money");
 
-                entity.Property(e => e.Price)
-                    .HasColumnType("money")
-                    .HasComment("包含设计费运费");
+                entity.Property(e => e.Price).HasColumnType("money");
 
                 entity.Property(e => e.PrimaryId)
                     .IsRequired()
@@ -1137,8 +1129,7 @@ namespace Tool.Models
                 entity.Property(e => e.SkuId)
                     .IsRequired()
                     .HasMaxLength(220)
-                    .IsUnicode(false)
-                    .HasComment("商品Sku");
+                    .IsUnicode(false);
 
                 entity.Property(e => e.SkuName)
                     .HasMaxLength(200)
@@ -1160,23 +1151,14 @@ namespace Tool.Models
 
             modelBuilder.Entity<OrderLogistic>(entity =>
             {
-                entity.HasKey(e => e.LogisticsId)
-                    .HasName("PK_ORDER_LOGISTICS");
+                entity.HasNoKey();
 
                 entity.ToTable("Order_Logistics");
-
-                entity.HasComment("Order_Logistics - 物流信息");
-
-                entity.Property(e => e.LogisticsId)
-                    .HasMaxLength(36)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.Address)
                     .IsRequired()
                     .HasMaxLength(300)
                     .IsUnicode(false);
-
-                entity.Property(e => e.Appellation).HasComment("1  Mr  Mr\r\n   2  Mrs  Mrs\r\n   3  Ms Ms");
 
                 entity.Property(e => e.AreaId)
                     .IsRequired()
@@ -1187,9 +1169,7 @@ namespace Tool.Models
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.BasedMoney)
-                    .HasColumnType("money")
-                    .HasComment("复制过来的数据");
+                entity.Property(e => e.BasedMoney).HasColumnType("money");
 
                 entity.Property(e => e.City)
                     .IsRequired()
@@ -1219,10 +1199,13 @@ namespace Tool.Models
 
                 entity.Property(e => e.CreateTime).HasColumnType("datetime");
 
-                entity.Property(e => e.IsShip).HasComment("与订单主表的状态有关");
-
                 entity.Property(e => e.LogisticsCode)
                     .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LogisticsId)
+                    .IsRequired()
+                    .HasMaxLength(36)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Name)
@@ -1265,20 +1248,13 @@ namespace Tool.Models
 
             modelBuilder.Entity<OrderPrimary>(entity =>
             {
-                entity.HasKey(e => e.PrimaryId)
-                    .HasName("PK_ORDER_PRIMARY");
+                entity.HasNoKey();
 
                 entity.ToTable("Order_Primary");
 
-                entity.Property(e => e.PrimaryId)
-                    .HasMaxLength(36)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.AdminRemark).HasMaxLength(800);
 
-                entity.Property(e => e.Amount)
-                    .HasColumnType("money")
-                    .HasComment("订单总金额含邮费优惠金额折扣金额");
+                entity.Property(e => e.Amount).HasColumnType("money");
 
                 entity.Property(e => e.CouponId)
                     .HasMaxLength(36)
@@ -1295,9 +1271,7 @@ namespace Tool.Models
                     .HasMaxLength(36)
                     .IsUnicode(false);
 
-                entity.Property(e => e.DesignPrice)
-                    .HasColumnType("money")
-                    .HasComment("美金");
+                entity.Property(e => e.DesignPrice).HasColumnType("money");
 
                 entity.Property(e => e.Email)
                     .HasMaxLength(200)
@@ -1306,8 +1280,6 @@ namespace Tool.Models
 
                 entity.Property(e => e.ExchangeRate).HasColumnType("money");
 
-                entity.Property(e => e.IsSync).HasDefaultValueSql("((0))");
-
                 entity.Property(e => e.LogisticsId)
                     .HasMaxLength(36)
                     .IsUnicode(false);
@@ -1315,12 +1287,9 @@ namespace Tool.Models
                 entity.Property(e => e.ModeId)
                     .IsRequired()
                     .HasMaxLength(36)
-                    .IsUnicode(false)
-                    .HasComment("支付方式");
+                    .IsUnicode(false);
 
-                entity.Property(e => e.OrderMoney)
-                    .HasColumnType("money")
-                    .HasComment("订单总金额含邮费 减去优惠卷金额");
+                entity.Property(e => e.OrderMoney).HasColumnType("money");
 
                 entity.Property(e => e.OrderTime).HasColumnType("datetime");
 
@@ -1333,13 +1302,9 @@ namespace Tool.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.PayMoney)
-                    .HasColumnType("money")
-                    .HasComment("含邮费 单位实际支付币种");
+                entity.Property(e => e.PayMoney).HasColumnType("money");
 
-                entity.Property(e => e.PayPostage)
-                    .HasColumnType("money")
-                    .HasComment("含邮费 单位实际支付币种");
+                entity.Property(e => e.PayPostage).HasColumnType("money");
 
                 entity.Property(e => e.PayTime).HasColumnType("datetime");
 
@@ -1351,14 +1316,17 @@ namespace Tool.Models
 
                 entity.Property(e => e.Postage).HasColumnType("money");
 
+                entity.Property(e => e.PrimaryId)
+                    .IsRequired()
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Reduction).HasColumnType("money");
 
                 entity.Property(e => e.Serial)
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
-
-                entity.Property(e => e.Status).HasComment("1  未付款  Unpaid\r\n   2  已付款  Paid\r\n   3  订单暂停 Pause\r\n   4  已发货  Shipped\r\n   5  订单完成 Ok\r\n   7  关闭订单  Close\r\n   ");
 
                 entity.Property(e => e.SyncTime).HasColumnType("datetime");
 
@@ -1380,11 +1348,12 @@ namespace Tool.Models
 
             modelBuilder.Entity<PayCurrency>(entity =>
             {
-                entity.HasKey(e => e.CurrencyCodeId);
+                entity.HasNoKey();
 
                 entity.ToTable("Pay_Currency");
 
                 entity.Property(e => e.CurrencyCodeId)
+                    .IsRequired()
                     .HasMaxLength(10)
                     .IsUnicode(false);
 
@@ -1407,17 +1376,17 @@ namespace Tool.Models
 
             modelBuilder.Entity<PayMode>(entity =>
             {
-                entity.HasKey(e => e.ModeId)
-                    .HasName("PK_PAY_MODE");
+                entity.HasNoKey();
 
                 entity.ToTable("Pay_Mode");
 
-                entity.Property(e => e.ModeId)
-                    .HasMaxLength(36)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.FileId)
                     .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ModeId)
+                    .IsRequired()
+                    .HasMaxLength(36)
                     .IsUnicode(false);
 
                 entity.Property(e => e.ModeName)
@@ -1435,20 +1404,170 @@ namespace Tool.Models
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<Primary>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("Primary");
+
+                entity.Property(e => e.Address)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Address2)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Amount)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.City)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ClientIp)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("Client_Ip");
+
+                entity.Property(e => e.Country)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Currency)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Email)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FromUrl)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("From_Url");
+
+                entity.Property(e => e.InvoiceId)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("Invoice_Id");
+
+                entity.Property(e => e.IsHide)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IsPaid)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IsPaidSync)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IsPostSync)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.MerchantId)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NotifyUrl)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("Notify_Url");
+
+                entity.Property(e => e.OrderNo)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("Order_No");
+
+                entity.Property(e => e.PayPalMail)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PayTime)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PostTime)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PrimaryId)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ReturnUri)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("Return_Uri");
+
+                entity.Property(e => e.SiteTitle)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("Site_Title");
+
+                entity.Property(e => e.State)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Subject)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SuccessUri)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("Success_Uri");
+
+                entity.Property(e => e.Telephone)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Token)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TxnId)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserPath)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Version)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.WebId)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ZipCode)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("Zip_Code");
+            });
+
             modelBuilder.Entity<PropertyDelimit>(entity =>
             {
-                entity.HasKey(e => e.DelimitId)
-                    .HasName("PK_PROPERTY_DELIMIT");
+                entity.HasNoKey();
 
                 entity.ToTable("Property_Delimit");
 
-                entity.HasComment("Property_Delimit -  商品属性定义表");
+                entity.Property(e => e.BackName).HasMaxLength(200);
 
                 entity.Property(e => e.DelimitId)
+                    .IsRequired()
                     .HasMaxLength(36)
                     .IsUnicode(false);
-
-                entity.Property(e => e.BackName).HasMaxLength(200);
 
                 entity.Property(e => e.PropertyId)
                     .IsRequired()
@@ -1461,8 +1580,7 @@ namespace Tool.Models
 
                 entity.Property(e => e.Val)
                     .HasMaxLength(36)
-                    .IsUnicode(false)
-                    .HasComment("可空，颜色标准：#FFFFFF");
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Version)
                     .HasMaxLength(100)
@@ -1471,18 +1589,16 @@ namespace Tool.Models
 
             modelBuilder.Entity<PropertyList>(entity =>
             {
-                entity.HasKey(e => e.PropertyId)
-                    .HasName("PK_PROPERTY_LIST");
+                entity.HasNoKey();
 
                 entity.ToTable("Property_List");
 
-                entity.HasComment("Property_List -  商品属性表");
+                entity.Property(e => e.BackName).HasMaxLength(200);
 
                 entity.Property(e => e.PropertyId)
+                    .IsRequired()
                     .HasMaxLength(36)
                     .IsUnicode(false);
-
-                entity.Property(e => e.BackName).HasMaxLength(200);
 
                 entity.Property(e => e.ShowName)
                     .IsRequired()
@@ -1495,20 +1611,18 @@ namespace Tool.Models
 
             modelBuilder.Entity<SysAccount>(entity =>
             {
-                entity.HasKey(e => e.AdminId)
-                    .HasName("PK_SYS_ACCOUNT");
+                entity.HasNoKey();
 
                 entity.ToTable("Sys_Account");
-
-                entity.HasComment("Sys_Account - 管理员表");
-
-                entity.Property(e => e.AdminId)
-                    .HasMaxLength(36)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.Account)
                     .IsRequired()
                     .HasMaxLength(36);
+
+                entity.Property(e => e.AdminId)
+                    .IsRequired()
+                    .HasMaxLength(36)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Mail).HasMaxLength(100);
 
@@ -1528,15 +1642,16 @@ namespace Tool.Models
 
             modelBuilder.Entity<SysPage>(entity =>
             {
-                entity.HasKey(e => e.PageId);
+                entity.HasNoKey();
 
                 entity.ToTable("Sys_Pages");
 
+                entity.Property(e => e.Introduction).HasColumnType("text");
+
                 entity.Property(e => e.PageId)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
-
-                entity.Property(e => e.Introduction).HasColumnType("text");
 
                 entity.Property(e => e.Version)
                     .HasMaxLength(36)
@@ -1545,14 +1660,12 @@ namespace Tool.Models
 
             modelBuilder.Entity<SysSetting>(entity =>
             {
-                entity.HasKey(e => e.Rowid)
-                    .HasName("PK_SYS_SETTINGS");
+                entity.HasNoKey();
 
                 entity.ToTable("Sys_Settings");
 
-                entity.HasComment("Sys_Settings - 网站设置");
-
                 entity.Property(e => e.Rowid)
+                    .IsRequired()
                     .HasMaxLength(36)
                     .IsUnicode(false);
 
@@ -1567,12 +1680,13 @@ namespace Tool.Models
 
             modelBuilder.Entity<UserAccount>(entity =>
             {
-                entity.HasKey(e => e.Account)
-                    .HasName("PK_user_ACCOUNT");
+                entity.HasNoKey();
 
                 entity.ToTable("User_Account");
 
-                entity.Property(e => e.Account).HasMaxLength(100);
+                entity.Property(e => e.Account)
+                    .IsRequired()
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.Pwd)
                     .IsRequired()
