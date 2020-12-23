@@ -5,7 +5,13 @@ VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B25D4087-924A-4DDF-A245-A35660D0D9AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tool", "src\Tool\Tool.csproj", "{0FCFA48D-6952-4B9E-ADF7-BAD950CDB857}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tool", "src\Tool\Tool.csproj", "{0FCFA48D-6952-4B9E-ADF7-BAD950CDB857}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yq.ibase", "..\Erp\erp\yq.ibase\yq.ibase.csproj", "{58909A0E-1DBC-4B7B-B46E-30DAA8B8A8CD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yq.proxy", "..\Erp\erp\yq.proxy\yq.proxy.csproj", "{CF325E8A-983F-4BA2-A737-339603464835}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yq.util", "..\Erp\erp\yq.util\yq.util.csproj", "{EBA5B527-0409-462A-93E2-91DCC854E474}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,12 +23,27 @@ Global
 		{0FCFA48D-6952-4B9E-ADF7-BAD950CDB857}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FCFA48D-6952-4B9E-ADF7-BAD950CDB857}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FCFA48D-6952-4B9E-ADF7-BAD950CDB857}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58909A0E-1DBC-4B7B-B46E-30DAA8B8A8CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58909A0E-1DBC-4B7B-B46E-30DAA8B8A8CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58909A0E-1DBC-4B7B-B46E-30DAA8B8A8CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58909A0E-1DBC-4B7B-B46E-30DAA8B8A8CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF325E8A-983F-4BA2-A737-339603464835}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF325E8A-983F-4BA2-A737-339603464835}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF325E8A-983F-4BA2-A737-339603464835}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF325E8A-983F-4BA2-A737-339603464835}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBA5B527-0409-462A-93E2-91DCC854E474}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBA5B527-0409-462A-93E2-91DCC854E474}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBA5B527-0409-462A-93E2-91DCC854E474}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBA5B527-0409-462A-93E2-91DCC854E474}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0FCFA48D-6952-4B9E-ADF7-BAD950CDB857} = {B25D4087-924A-4DDF-A245-A35660D0D9AE}
+		{58909A0E-1DBC-4B7B-B46E-30DAA8B8A8CD} = {B25D4087-924A-4DDF-A245-A35660D0D9AE}
+		{CF325E8A-983F-4BA2-A737-339603464835} = {B25D4087-924A-4DDF-A245-A35660D0D9AE}
+		{EBA5B527-0409-462A-93E2-91DCC854E474} = {B25D4087-924A-4DDF-A245-A35660D0D9AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {242973D6-1A2C-4CA5-A1FA-0D7EFB825125}

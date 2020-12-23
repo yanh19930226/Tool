@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Work\\ERP\\Tool\\src\\Tool\\Tool.csproj": {}
+    "D:\\XC\\Tool\\src\\Tool\\Tool.csproj": {}
   },
   "projects": {
-    "D:\\Work\\ERP\\Tool\\src\\Tool\\Tool.csproj": {
+    "D:\\XC\\Tool\\src\\Tool\\Tool.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Work\\ERP\\Tool\\src\\Tool\\Tool.csproj",
+        "projectUniqueName": "D:\\XC\\Tool\\src\\Tool\\Tool.csproj",
         "projectName": "Tool",
-        "projectPath": "D:\\Work\\ERP\\Tool\\src\\Tool\\Tool.csproj",
+        "projectPath": "D:\\XC\\Tool\\src\\Tool\\Tool.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\Work\\ERP\\Tool\\src\\Tool\\obj\\",
+        "outputPath": "D:\\XC\\Tool\\src\\Tool\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -31,6 +31,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -42,6 +43,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Core": {
               "target": "Package",
@@ -88,7 +90,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

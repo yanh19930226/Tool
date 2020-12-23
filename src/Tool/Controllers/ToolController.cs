@@ -34,38 +34,39 @@ namespace Tool.Controllers
                 var orderPrimary = new OrderPrimary()
                 {
                     PrimaryId=item.PrimaryId,
-                    Serial = "",
+                  
                     PaymentCode = null,
-                    WebId = item.WebId,
+                    WebId = "NewTemp01",
                     UserId=null,
                     Email =item.Email,
-                    Status = Convert.ToDateTime(item.PayTime)==null?1:2,
+                    //1未付款2已付款
+                    Status = item.PayTime== null ? 1 : 2,
                     CurrencyId = item.Currency,
-                    OrderMoney = Convert.ToDecimal(item.Amount),
                     Amount =Convert.ToDecimal(item.Amount),
                     Postage = 0,
-                    PayCurrencyId = "",
-                    PayMoney = Convert.ToDecimal(item.Amount),
                     PayPostage =0,
-                    ExchangeRate = 1m,
                     DesignPrice = 0,
                     ModeId = null,
-                    LogisticsId = "",
                     CouponId = null,
                     CouponUserId = null,
                     CouponReduction = 0,
                     Reduction = 0,
-                    PostTime = DateTime.Now,
+                    PostTime = Convert.ToDateTime(item.PostTime),
                     PayTime = Convert.ToDateTime(item.PayTime),
                     OrderTime = null,
-                    UserRemark = "",
-                    AdminRemark = "",
                     IsAddress = 1,
                     IsSync = 0,
                     SyncTime = null,
                     IsPay =0,
-                    PayModelName = "",
-                 };
+
+                    Serial = "",
+                    OrderMoney = Convert.ToDecimal(item.Amount),
+                    LogisticsId = "",
+                    PayCurrencyId = "",
+                    ExchangeRate = 1m,
+                    PayMoney = Convert.ToDecimal(item.Amount),
+
+                };
 
                 var orderBilling = new OrderBilling()
                 {

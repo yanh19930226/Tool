@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "J9gNI2DuhxhhYaQJt1m9eZZnWhSZjER/+Xtd9MyFJl3w5VWu1RTmh9jU6aI5K6ea281u/CouPmMDZ+qeD/eWPQ==",
+  "dgSpecHash": "Ma/4/kurlVYIBb04QiZvYKGMpxZp8OKMWl5wUDyVTyHXyVpbIDiWVEVs2Ehgd8KKt4x/PdQZCynr8CXol+R58Q==",
   "success": true,
-  "projectFilePath": "D:\\Work\\ERP\\Tool\\src\\Tool\\Tool.csproj",
+  "projectFilePath": "D:\\XC\\Tool\\src\\Tool\\Tool.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\apache.thrift\\1.0.2\\apache.thrift.1.0.2.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\autofac\\5.2.0\\autofac.5.2.0.nupkg.sha512",
