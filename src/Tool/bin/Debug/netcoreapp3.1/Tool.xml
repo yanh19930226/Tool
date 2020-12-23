@@ -4,6 +4,34 @@
         <name>Tool</name>
     </assembly>
     <members>
+        <member name="M:Tool.Controllers.AdvertiseController.GetCompanyId(System.String)">
+            <summary>
+            获取公司Id
+            </summary>
+            <param name="ShopId"></param>
+        </member>
+        <member name="M:Tool.Controllers.AdvertiseController.GetFeeServices(System.String,System.String)">
+            <summary>
+            获取广告费用
+            </summary>
+            <param name="ShopId"></param>
+            <param name="Date"></param>
+        </member>
+        <member name="M:Tool.Controllers.AdvertiseController.GetShopAccount(System.String)">
+            <summary>
+            获取店铺关联的账号
+            </summary>
+            <param name="ShopId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tool.Controllers.AdvertiseController.GetFee(System.String,System.String)">
+            <summary>
+            GetFee
+            </summary>
+            <param name="ShopId">店铺Id</param>
+            <param name="Date">时间</param>
+            <returns></returns>
+        </member>
         <member name="M:Tool.Controllers.ToolController.Uploade1">
             <summary>
             Uploade1

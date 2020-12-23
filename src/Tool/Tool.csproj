@@ -20,5 +20,13 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Erp\erp\AdvertiseSDK\AdvertiseSDK.csproj" />
+    <ProjectReference Include="..\..\..\Erp\erp\erp.dbmodel\erp.dbmodel.csproj" />
+    <ProjectReference Include="..\..\..\Erp\erp\yq.ibase\yq.ibase.csproj" />
+    <ProjectReference Include="..\..\..\Erp\erp\yq.proxy\yq.proxy.csproj" />
+    <ProjectReference Include="..\..\..\Erp\erp\yq.util\yq.util.csproj" />
+  </ItemGroup>
+
 
 </Project>

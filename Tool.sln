@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yq.proxy", "..\Erp\erp\yq.p
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "yq.util", "..\Erp\erp\yq.util\yq.util.csproj", "{EBA5B527-0409-462A-93E2-91DCC854E474}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "erp.dbmodel", "..\Erp\erp\erp.dbmodel\erp.dbmodel.csproj", "{1FB27B38-2D25-4BD0-969C-BE294DCD4DA6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvertiseSDK", "..\Erp\erp\AdvertiseSDK\AdvertiseSDK.csproj", "{331537C5-F299-424C-97DE-E12D294A8239}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +39,14 @@ Global
 		{EBA5B527-0409-462A-93E2-91DCC854E474}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBA5B527-0409-462A-93E2-91DCC854E474}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBA5B527-0409-462A-93E2-91DCC854E474}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FB27B38-2D25-4BD0-969C-BE294DCD4DA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FB27B38-2D25-4BD0-969C-BE294DCD4DA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FB27B38-2D25-4BD0-969C-BE294DCD4DA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FB27B38-2D25-4BD0-969C-BE294DCD4DA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{331537C5-F299-424C-97DE-E12D294A8239}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{331537C5-F299-424C-97DE-E12D294A8239}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{331537C5-F299-424C-97DE-E12D294A8239}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{331537C5-F299-424C-97DE-E12D294A8239}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +56,8 @@ Global
 		{58909A0E-1DBC-4B7B-B46E-30DAA8B8A8CD} = {B25D4087-924A-4DDF-A245-A35660D0D9AE}
 		{CF325E8A-983F-4BA2-A737-339603464835} = {B25D4087-924A-4DDF-A245-A35660D0D9AE}
 		{EBA5B527-0409-462A-93E2-91DCC854E474} = {B25D4087-924A-4DDF-A245-A35660D0D9AE}
+		{1FB27B38-2D25-4BD0-969C-BE294DCD4DA6} = {B25D4087-924A-4DDF-A245-A35660D0D9AE}
+		{331537C5-F299-424C-97DE-E12D294A8239} = {B25D4087-924A-4DDF-A245-A35660D0D9AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {242973D6-1A2C-4CA5-A1FA-0D7EFB825125}
